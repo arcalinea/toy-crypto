@@ -16,17 +16,27 @@ class Curve:
       return str(self)
 
     def get_points(self):
+        print "getting points"
         list = []
         for x in range(0, self.prime):
             y2 = (x**3 + self.a*x + self.b) % self.prime
             y = y2 / 2
-            if not y.is_integer() or y2 == 0:
+            if not type(y) == int or y2 == 0:
                 continue
             y = int(y)
+            print y
             list.append(Point(x, y % self.prime, self))
             if not list[-1].is_infinity():
                 list.append(Point(x, -y % self.prime, self))
         return list
+
+    def has_point(self, x):
+        y2 = (x**3 + self.a*x + self.b) % self.prime
+        y = y2 / 2
+        if not type(y) == int or y2 == 0:
+            return True
+        else:
+            return False
 
     # def multiply_points(self, x, y, num):
     #     x = x % self.prime
@@ -51,6 +61,14 @@ class Point:
     def is_infinity(self):
         return self.x <=0 and self.y <= 0
 
+    def get_order(self):
+        res = Point(1, 1, self.curve)
+        order = 1
+        while not res.is_infinity():
+            res = self*order
+            order += 1
+        return order
+
     def __str__(self):
         return "Point: {0}, {1}".format(str(self.x), str(self.y))
 
@@ -73,10 +91,10 @@ class Point:
         p2 = other
         curve = self.curve
 
-        #p1 is zero
+        # p1 is zero
         if p1.is_infinity():
             return p2
-        #p2 is zero
+        # p2 is zero
         if p2.is_infinity():
             return p1
 
