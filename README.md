@@ -15,3 +15,6 @@ Small, simple implementations of cryptographic algorithms to get a feel for the 
     - https://johannes-bauer.com/compsci/ecc/
 
 4. [Elliptic Curve Diffie-Hellman](https://github.com/j2kun/elliptic-curve-diffie-hellman/blob/master/diffie-hellman.py)
+
+5. [Elliptic Curve Digital Signature](http://www.infosecwriters.com/Papers/Anoopms_ECC.pdf)
+    - https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
