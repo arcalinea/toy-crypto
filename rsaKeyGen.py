@@ -15,13 +15,14 @@ def is_prime(x):
   return True
 
 # Euler's Totient Function
+# Count of numbers up to n which are relatively prime to n
 # Finding phi from composite for large numbers is hard
 def phi_hard(composite):
-    res = 1
-    for i in range(2, composite):
-        if gcd(i, composite) is 1:
-            res += 1
-    return res
+    count = 1
+    for num in range(2, composite):
+        if gcd(num, composite) is 1:
+            count += 1
+    return count
 
 # If you know prime factors of composite, finding phi becomes easy
 def phi_easy(p1, p2):
@@ -36,9 +37,9 @@ def find_pubkeys(p1, p2):
     pubkeys = []
     totient = phi_easy(p1, p2)
     # start from 3, smallest prime. in practice, starts at bigger prime (65537)
-    for i in range(4, totient):
-        if is_prime(i):
-            pubkeys.append(i)
+    for pub in range(4, totient):
+        if is_prime(pub):
+            pubkeys.append(pub)
     return pubkeys
 
 # Extended Euclidean Algorithm
@@ -46,10 +47,9 @@ def find_pubkeys(p1, p2):
 def find_privkey(pubkey, p1, p2):
     composite = p1 * p2
     totient = phi_easy(p1, p2)
-    for i in range(1, composite):
-        x = (pubkey * i - 1) % totient
-        if x is 0:
-            return i
+    for priv in range(1, composite):
+        if ((pubkey * priv) - 1) % totient is 0:
+            return priv
 
 def gen_keypair(p1, p2):
     keys = []

@@ -17,7 +17,7 @@ print "All possible keys:", keys
 # We'll go with the first keypair: pub 5, priv 29
 pubkey = keys[0]['pub']
 privkey = keys[0]['priv']
-print "Your pubkey is %d, your privkey is %d\n" % (pubkey, privkey)
+print "\nYour pubkey is %d, your privkey is %d\n" % (pubkey, privkey)
 
 
 def encrypt_char(num):
